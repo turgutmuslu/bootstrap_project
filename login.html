@@ -89,8 +89,8 @@
     const password = document.getElementById('password').value;
 
     // Make a POST request to the API to login
-    fetch('HERE_YOU_FILL/api/user/login', {
-      method: 'POST',
+    fetch('http://localhost:3000/user/', {
+      method: 'GET',
       body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' }
     })
