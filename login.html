@@ -75,7 +75,7 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Password">
           </div>
-          <button class="btn btn-primary btn-block" onclick="login()">Login</button>
+          <button type="button" class="btn btn-primary btn-block" onclick="login(); return false">Login</button>
         </form>
         <hr>
         <div>
@@ -86,18 +86,15 @@
   </div>
 
   <script>
-    function login() {
+    function login(e) {
+      // e.preventDefault()
       // Get the email and password input values
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-
+      console.log(email,password);
       // Make a POST request to the API to login
-      fetch('http://localhost:3000/user/', {
+      fetch(`http://localhost:3000/user?email=${email}&password=${password}` , {
           method: 'GET',
-          body: JSON.stringify({
-            email,
-            password
-          }),
           headers: {
             'Content-Type': 'application/json'
           }
