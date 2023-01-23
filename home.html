@@ -24,53 +24,98 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+    <script>
+        var emotional_value = 0;
+
+        function updateEmotionalValue() {
+            var select = document.getElementById("emotions");
+            var selectedValue = select.options[select.selectedIndex].value;
+            if (selectedValue === "melancholic" || selectedValue === "sad") {
+                emotional_value -= 1;
+            } else if (selectedValue === "happy" || selectedValue === "hyped") {
+                emotional_value += 1;
+            }
+            console.log("Emotional value: " + emotional_value);
+        }
+    </script>
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Homepage</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="music.html">Music</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="events.html">Events</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shop.html">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="media.html">Media</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.html">My Profile</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Homepage</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="music.html">Music</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="events.html">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="shop.html">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="media.html">Media</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">My Profile</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <h1 class="text-center my-4">Rate Your Emotions</h1>
+            <form>
+              <div class="form-group">
+                <label for="emotions">How do you feel today?</label>
+                <select class="form-control" id="emotions" onchange="updateEmotionalValue()">
+                  <option value="melancholic">Melancholic</option>
+                  <option value="sad">Sad</option>
+                  <option value="neutral">Neutral</option>
+                  <option value="happy">Happy</option>
+                  <option value="hyped">Hyped</option>
+                </select>
+                </div>
+                <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary" onclick="updateEmotionalValue()">Submit</button>
+                </div>
+                </form>
+                </div>
+                </div>
+                
+                  </div>
     <section id="myprofile">
         <div class="container mt-5">
             <h1>My Profile</h1>
             <div class="row">
                 <div class="col-md-4">
-                    <img src="profile.jpg" class="img-thumbnail">
+                    <img src="https://i.ibb.co/6DM1tr7/DALL-E-2023-01-23-20-24-19-a-jazz-group-named-lima-blues.png" class="img-thumbnail">
                 </div>
                 <div class="col-md-8">
-                    <h2> John Smith</h2>
-                    <p>I am the lead vocalist and guitarist of my band</p>
-                    <p>I have been playing music for over 15 years, and I am passionate about making music with my band.
+                    <h2> Lima Blues</h2>
+                    <p>We are a Jazz band who aim to sing and play for the most emotional hearts and most beautiful ears.</p>
+                    <p>Lets wander around the website, buy tickets and albums, and play some of our songs. 
                     </p>
                 </div>
             </div>
