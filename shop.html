@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Online Shopping</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+</head>
+
+<body class="bg-light">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Online Shop</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="music.html">Music</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="media.html">Media</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">My Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container mt-5">
+        <h1 class="text-center text-primary">Online Shopping</h1>
+        <div class="container mt-5">
+            <h1>Upcoming Events</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Venue</th>
+                        <th>Location</th>
+                        <th>Tickets</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>January 1, 2022</td>
+                        <td>The Fillmore</td>
+                        <td>San Francisco, CA</td>
+                        <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
+                    </tr>
+                    <tr>
+                        <td>February 14, 2022</td>
+                        <td>The Apollo Theater</td>
+                        <td>New York, NY</td>
+                        <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
+                    </tr>
+                    <tr>
+                        <td>March 30, 2022</td>
+                        <td>The Hollywood Bowl</td>
+                        <td>Los Angeles, CA</td>
+                        <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row mt-5">
+            <div class="mx-auto">
+                <h2 class="">Shop</h2>
+                <div class="row">
+                    <div class="row" id="products">
+                        <div class="card mr-2">
+                            <img src="https://via.placeholder.com/150" class="card-img-top img-fluid"
+                                alt="Product Image">
+                            <div class="card-body">
+                                <h5 class="card-title">Product Name</h5>
+                                <p class="card-text">Price: $20</p>
+                                <button class="btn btn-primary" onclick="addToBasket('productId')">Add to Basket</button>
+                            </div>
+                        </div>
+                        <div class="card mr-2">
+                            <img src="https://via.placeholder.com/150" class="card-img-top img-fluid"
+                                alt="Product Image">
+                            <div class="card-body">
+                                <h5 class="card-title">Product Name</h5>
+                                <p class="card-text">Price: $20</p>
+                                <button class="btn btn-primary" onclick="addToBasket('productId')">Add to Basket</button>
+                            </div>
+                        </div>
+                        <div class="card mr-2">
+                            <img src="https://via.placeholder.com/150" class="card-img-top img-fluid"
+                                alt="Product Image">
+                            <div class="card-body">
+                                <h5 class="card-title">Product Name</h5>
+                                <p class="card-text">Price: $20</p>
+                                <button class="btn btn-primary" onclick="addToBasket('productId')">Add to Basket</button>
+                            </div>
+                        </div>
+                        <div class="card mr-2">
+                            <img src="https://via.placeholder.com/150" class="card-img-top img-fluid"
+                                alt="Product Image">
+                            <div class="card-body">
+                                <h5 class="card-title">Product Name</h5>
+                                <p class="card-text">Price: $20</p>
+                                <button class="btn btn-primary" onclick="addToBasket('productId')">Add to Basket</button>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://via.placeholder.com/150" class="card-img-top img-fluid"
+                                alt="Product Image">
+                            <div class="card-body">
+                                <h5 class="card-title">Product Name</h5>
+                                <p class="card-text">Price: $20</p>
+                                <button class="btn btn-primary" onclick="addToBasket('productId')">Add to Basket</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mt-5 mx-auto">
+            <h2 class="text-right">Shopping Cart</h2>
+            <div class="card">
+                <div class="card-body" id="cart">
+                    <!-- Cart items will be dynamically added here -->
+                </div>
+                <div class="card-footer">
+                    <h5 class="text-center">Total: $<span id="total">0</span></h5>
+                    <button class="btn btn-danger btn-block" id="checkout-btn" disabled>Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+
+    <script>
+        // Make a GET request to the API to retrieve the products from the database
+        fetch('HERE_YOU_FILL/api/products')
+            .then(response => response.json())
+            .then(data => {
+                // Loop through the products and add them to the page
+                data.forEach(product => {
+                    const div = document.createElement('div');
+                    div.innerHTML = `
+          <h3>${product.name}</h3>
+          <img src="${product.icon_url}" alt="${product.name}">
+          <p>Price: ${product.price}</p>
+          <p>Emotional Value: ${product.emotional_value}</p>
+          <button onclick="addToBasket('${product._id}')">Add to Basket</button>
+        `;
+                    document.getElementById('products').appendChild(div);
+                });
+            });
+
+        // Function to handle adding a product to the basket
+        function addToBasket(productId) {
+            // Get the user email 
+            const email = document.getElementById('email').value;
+            // Make a POST request to the API to add the product to the basket
+            fetch('HERE_YOU_FILL/api/user/basket', {
+                method: 'POST',
+                body: JSON.stringify({
+                    email,
+                    productId
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            .then(response => response.json())
+                .then(data => {
+                    // Do something with the response data
+                    console.log(data);
+                    // Display the updated cart on the page
+                    displayCart(data.cart);
+                });
+        }
+
+        // Function to handle removing a product from the basket
+        function removeFromBasket(productId) {
+            // Get the user email
+            const email = document.getElementById('email').value;
+            // Make a DELETE request to the API to remove the product from the basket
+            fetch(HERE_YOU_FILL / api / user / basket / $ {
+                    productId
+                }, {
+                    method: 'DELETE',
+                    body: JSON.stringify({
+                        email
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Do something with the response data
+                    console.log(data);
+                    // Display the updated cart on the page
+                    displayCart(data.cart);
+                });
+        }
+
+        // Function to display the cart on the page
+        function displayCart(cart) {
+            // Clear the cart container
+            document.getElementById('cart').innerHTML = '';
+            // Check if the cart is empty
+            if (cart.length === 0) {
+                const div = document.createElement('div');
+                div.innerHTML = '<p>Your cart is empty.</p>';
+                document.getElementById('cart').appendChild(div);
+            } else {
+                // Loop through the items in the cart and add them to the page
+                let totalPrice = 0;
+                cart.forEach(item => {
+                    const div = document.createElement('div');
+                    div.innerHTML = `
+      <h4>${item.product.name}</h4>
+      <img src="${item.product.icon_url}" alt="${item.product.name}">
+      <p>Price: ${item.product.price}</p>
+      <p>Emotional Value: ${item.product.emotional_value}</p>
+      <button onclick="removeFromBasket('${item.product._id}')">Remove from Basket</button>
+    `;
+                    document.getElementById('cart').appendChild(div);
+                    totalPrice += item.product.price;
+                });
+
+                // Display the total price
+                const div = document.createElement('div');
+                div.innerHTML = `<p>Total Price: ${totalPrice}</p>`;
+                document.getElementById('cart').appendChild(div);
+
+                // check for credit limit
+                if (totalPrice > data.credit) {
+                    alert(
+                        "You don't have enough credit to buy these products. Please remove some items from the basket."
+                    )
+                } else {
+                    const div = document.createElement('div');
+                    div.innerHTML = `<button onclick="buy()">Buy</button>`;
+                    document.getElementById('cart').appendChild(div);
+                }
+            }
+        }
+
+        function buy() {
+            // make a post request to buy endpoint
+            // get the user email
+            const email = document.getElementById('email').value;
+            fetch(HERE_YOU_FILL / api / user / buy, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // handle successfull purchase
+                    console.log(data);
+                    alert("Thank you for your purchase!");
+                    //clear the cart
+                    displayCart([]);
+                });
+        }
+    </script>
+        <footer class="bg-dark">
+            <div class="container mt-5">
+                <p style="color: lightgrey;">Copyright - My Band 2022</p>
+            </div>
+        </footer>
+</body>
+
+</html>
