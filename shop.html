@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Online Shopping</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+        </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+        </script>
+</head>
+<script type="module">
+    import { createApp } from 'https://unpkg.com/petite-vue?module'
+    createApp({
+        user: JSON.parse(localStorage.getItem('user')) || null,
+        logout:()=>{
+            localStorage.clear()
+            document.location.href = "/home.html"
+        },
+        basket: JSON.parse(localStorage.getItem('user'))?.products_in_basket || [],
+        add(accumulator, a) {
+            return Number(accumulator) + Number(a.price)
+        },
+        products: [
+            {
+                name: "Happy Human Wallpaper",
+                price: "26",
+                icon_url: "https://i.scdn.co/image/ab67616d0000b273249eb295d33fc4c079081ca1",
+                emotional_value: 5
+            },
+            {
+                name: "Winter Blues Deluxe Album",
+                price: "50",
+                icon_url: "https://is2-ssl.mzstatic.com/image/thumb/Music123/v4/e8/76/e0/e876e0b0-e820-5bfb-5e40-f9dfa54676e1/20UMGIM05264.rgb.jpg/1200x1200bf-60.jpg",
+                emotional_value: 1
+            },
+            {
+                name: "Blue Blood (New)",
+                price: "90",
+                icon_url: "https://c.saavncdn.com/520/Anonymous-Blues-English-2017-500x500.jpg",
+                emotional_value: 3
+            },
+            {
+                name: "Awaken",
+                price: "15",
+                icon_url: "https://cdns-images.dzcdn.net/images/cover/f46b4d9baa2d63488ccaeee2519e7550/264x264.jpg",
+                emotional_value: 5
+            },
+            {
+                name: "Blues Delight Nostalgic Edition",
+                price: "57",
+                icon_url: "https://i.scdn.co/image/ab67616d0000b273958099acbe1ccc0b2c46818d",
+                emotional_value: 2
+            },
+        ],
+        async basket_action(method, name, price, icon_url, emotional_value) {
+            if (!this.user) {
+                document.location.href = "/login.html"
+                return
+            }
+            if(method === "POST" && this.basket.some(item => item.name === name)){
+                alert("You already have this product in your cart!")
+                return
+            }
+            if(method === "POST" && this.user.current_credit - this.basket.reduce(this.add, 0) < price){
+                alert("You don't have enough credits to buy this item.")
+                return
+            }
+            const result = await fetch('http://localhost:3000/user/basket?email=' + this.user.email, {
+                method: method,
+                body: JSON.stringify({
+                    name,
+                    price,
+                    icon_url,
+                    emotional_value
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const data = await result.json()
+            if (!data.status) {
+                alert(data.message)
+                console.log(data)
+                return
+            }
+            console.log(data);
+            localStorage.setItem('user', JSON.stringify(data.data))
+            this.user = data.data
+            this.basket = data.data.products_in_basket
+        }
+    }).mount("body")
+</script>
+
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Online Shop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="music.html">Music</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="events.html">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="media.html">Media</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div><h5 v-if="user">Logged in as: {{user.name}} | <span style="cursor: pointer;" @click="logout">Logout</span></h5> </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 class="text-center text-primary">Online Shopping</h1>
+        <div class="container mt-5">
+            <h1>Upcoming Events</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Venue</th>
+                        <th>Location</th>
+                        <th>Tickets</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>January 1, 2022</td>
+                        <td>The Fillmore</td>
+                        <td>San Francisco, CA</td>
+                        <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
+                    </tr>
+                    <tr>
+                        <td>February 14, 2022</td>
+                        <td>The Apollo Theater</td>
+                        <td>New York, NY</td>
+                        <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
+                    </tr>
+                    <tr>
+                        <td>March 30, 2022</td>
+                        <td>The Hollywood Bowl</td>
+                        <td>Los Angeles, CA</td>
+                        <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row mt-5">
+            <div class="mx-auto">
+                <h2 class="">Shop</h2>
+                <div class="row">
+                    <div class="row" id="products">
+                        <div style="width:200px" v-for="item of products" class="card mr-2">
+                            <img style="object-fit: cover; height: 200px; width:200px" :src="item.icon_url"
+                                class="card-img-top img-fluid" alt="Product Image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item.name}}</h5>
+                                <p class="card-text">Price: ${{item.price}}</p>
+                                <button class="btn btn-primary" @click="basket_action('POST',item.name, item.price,
+                                    item.icon_url, item.emotional_value)">Add to Basket</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="user" class="mt-5 mx-auto">
+            <h2 class="text-right">Shopping Cart</h2>
+            <div class="row">
+                <div class="row" id="cart">
+                    <div style="width:200px" v-for="item of basket" class="card mr-2">
+                        <img style="object-fit: cover; height: 200px; width:200px" :src="item.icon_url"
+                            class="card-img-top img-fluid" alt="Product Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.name}}</h5>
+                            <p class="card-text">Price: ${{item.price}}</p>
+                            <button class="btn btn-danger" @click="basket_action('DELETE',item.name, item.price,
+                            item.icon_url, item.emotional_value)">Delete Product</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer mx-auto">
+                    <h5 class="text-center">Total: $<span id="total">{{basket.reduce(add, 0) || 0}}</span></h5>
+                    <h5 class="text-center">Credit: $<span id="total">{{user.current_credit}}</span></h5>
+                    <button class="btn btn-danger btn-block" id="checkout-btn" disabled>Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-dark">
+        <div class="container mt-5">
+            <p style="color: lightgrey;">Copyright - My Band 2022</p>
+        </div>
+    </footer>
+</body>
+
+</html>

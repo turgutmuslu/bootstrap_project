@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Band</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+        </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+        </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+        </script>
+</head>
+<script type="module">
+    import { createApp } from 'https://unpkg.com/petite-vue?module'
+
+
+    createApp({
+        user: JSON.parse(localStorage.getItem('user')),
+        logout:()=>{
+            localStorage.clear()
+            document.location.href = "/home.html"
+        },
+        selected_value: 3,
+        onchange(e) {
+            console.log(e.target.value);
+            this.selected_value = Number(e.target.value)
+        },
+        async updateEmotionalValue() {
+            const result = await fetch('http://localhost:3000/user/emotion?email=' + this.user.email, {
+                method: 'POST',
+                body: JSON.stringify({
+                    value: this.selected_value,
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const data = await result.json()
+            if (!data.status) {
+                alert(data.message)
+                return
+            }
+            console.log(data)
+            localStorage.setItem('user', JSON.stringify(data.data))
+            this.user = data.data
+        }
+    }).mount("body")
+</script>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Homepage</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="music.html">Music</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="events.html">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="shop.html">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="media.html">Media</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div><h5 v-if="user">Logged in as: {{user.name}} | <span style="cursor: pointer;" @click="logout">Logout</span></h5> </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div v-if="user" class="col-md-6 offset-md-3">
+                <h1 class="text-center my-4">Rate Your Emotions</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="emotions">How do you feel today?</label>
+                        <select class="form-control" id="emotions" @change="onchange($event)">
+                            <option value="1">Melancholic</option>
+                            <option value="2">Sad</option>
+                            <option value="3">Neutral</option>
+                            <option value="4">Happy</option>
+                            <option value="5">Hyped</option>
+                        </select>
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-primary"
+                            @click="updateEmotionalValue(); return false">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <section id="myprofile">
+        <div class="container mt-5">
+            <h1>My Profile</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="https://i.ibb.co/6DM1tr7/DALL-E-2023-01-23-20-24-19-a-jazz-group-named-lima-blues.png"
+                        class="img-thumbnail">
+                </div>
+                <div class="col-md-8">
+                    <h2> Lima Blues</h2>
+                    <p>We are a Jazz band who aim to sing and play for the most emotional hearts and most beautiful
+                        ears.</p>
+                    <p>Lets wander around the website, buy tickets and albums, and play some of our songs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark">
+        <div class="container mt-5">
+            <p style="color: lightgrey;">Copyright - My Band 2022</p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
