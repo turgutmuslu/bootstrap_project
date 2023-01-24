@@ -31,7 +31,9 @@
   <script>
     const user = localStorage.getItem('user')
     if (user) {
-      document.location.href = "/home.html"
+      const arr = document.location.href.split("/").splice(0,document.location.href.split("/").length-1)
+arr.push("home.html")
+document.location.href = arr.join("/")
     }
   </script>
 </head>
@@ -125,7 +127,9 @@
       }
       const user = data.data
       localStorage.setItem('user', JSON.stringify(user))
-      document.location.href = "/home.html"
+      const arr = document.location.href.split("/").splice(0,document.location.href.split("/").length-1)
+arr.push("home.html")
+document.location.href = arr.join("/")
     }
 
   </script>

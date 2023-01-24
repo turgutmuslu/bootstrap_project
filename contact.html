@@ -29,7 +29,9 @@
         user:JSON.parse(localStorage.getItem('user')),
         logout:()=>{
             localStorage.clear()
-            document.location.href = "/home.html"
+            const arr = document.location.href.split("/").splice(0,document.location.href.split("/").length-1)
+arr.push("home.html")
+document.location.href = arr.join("/")
         }
     }).mount("body")
 </script>

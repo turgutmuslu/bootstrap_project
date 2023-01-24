@@ -34,7 +34,9 @@
         user: JSON.parse(localStorage.getItem('user')) || null,
         logout:()=>{
             localStorage.clear()
-            document.location.href = "/home.html"
+            const arr = document.location.href.split("/").splice(0,document.location.href.split("/").length-1)
+arr.push("home.html")
+document.location.href = arr.join("/")
         },
         basket: JSON.parse(localStorage.getItem('user'))?.products_in_basket || [],
         add(accumulator, a) {
@@ -74,7 +76,9 @@
         ],
         async basket_action(method, name, price, icon_url, emotional_value) {
             if (!this.user) {
-                document.location.href = "/login.html"
+                const arr = document.location.href.split("/").splice(0,document.location.href.split("/").length-1)
+arr.push("login.html")
+document.location.href = arr.join("/")
                 return
             }
             if(method === "POST" && this.basket.some(item => item.name === name)){

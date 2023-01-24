@@ -6,7 +6,9 @@
     <script>
         const user = localStorage.getItem('user')
         if (user) {
-            document.location.href = "/home.html"
+            const arr = document.location.href.split("/").splice(0,document.location.href.split("/").length-1)
+arr.push("home.html")
+document.location.href = arr.join("/")
         }
     </script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -138,7 +140,9 @@
             const user = data.data
             console.log(data);
             localStorage.setItem('user', JSON.stringify(user))
-            document.location.href = "/home.html"
+            const arr = document.location.href.split("/").splice(0,document.location.href.split("/").length-1)
+arr.push("home.html")
+document.location.href = arr.join("/")
         }
     </script>
 </body>
