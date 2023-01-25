@@ -3,6 +3,7 @@
 
 <head>
     <title>Online Shopping</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -45,7 +46,7 @@
                 name: "Happy Human Wallpaper",
                 price: "26",
                 icon_url: "https://i.scdn.co/image/ab67616d0000b273249eb295d33fc4c079081ca1",
-                emotional_value: 5
+                emotional_value: 4
             },
             {
                 name: "Winter Blues Deluxe Album",
@@ -141,6 +142,7 @@
             </ul>
         </div>
         <div><h5 v-if="user">Logged in as: {{user.name}} | <span style="cursor: pointer;" @click="logout">Logout</span></h5> </div>
+        <div><h5 v-if="!user"><span style="cursor: pointer;" @click="document.location.href='login.html';">Log In or Sign Up</span></h5> </div>
     </nav>
     <div class="container mt-5">
         <h1 class="text-center text-primary">Online Shopping</h1>
@@ -157,23 +159,24 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>January 1, 2022</td>
-                        <td>The Fillmore</td>
-                        <td>San Francisco, CA</td>
-                        <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
-                    </tr>
-                    <tr>
-                        <td>February 14, 2022</td>
-                        <td>The Apollo Theater</td>
-                        <td>New York, NY</td>
-                        <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
-                    </tr>
-                    <tr>
-                        <td>March 30, 2022</td>
-                        <td>The Hollywood Bowl</td>
-                        <td>Los Angeles, CA</td>
-                        <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
-                    </tr>
+                        <tr>
+                            <td>January 1, 2023</td>
+                            <td>The Volkswagen Arena</td>
+                            <td>Beşiktaş</td>
+                            <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
+                        </tr>
+                        <tr>
+                            <td>February 14, 2023</td>
+                            <td>Atatürk Stadyumu</td>
+                            <td>Başakşehir</td>
+                            <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
+                        </tr>
+                        <tr>
+                            <td>March 30, 2023</td>
+                            <td>DoRock XL Venue</td>
+                            <td>Kadıköy</td>
+                            <td><a href="shop.html" class="btn btn-primary">Purchase Tickets</a></td>
+                        </tr>
                 </tbody>
             </table>
         </div>
@@ -197,10 +200,10 @@
             </div>
         </div>
         <div v-if="user" class="mt-5 mx-auto">
-            <h2 class="text-right">Shopping Cart</h2>
-            <div class="row">
-                <div class="row" id="cart">
-                    <div style="width:200px" v-for="item of basket" class="card mr-2">
+            <h2 class="text-center">Shopping Cart</h2>
+            <div class="card-footer mx-auto">
+                <div class="row mx-auto" id="cart">
+                    <div style="width:200px" v-for="item of basket" class="card mr-2 mx-auto">
                         <img style="object-fit: cover; height: 200px; width:200px" :src="item.icon_url"
                             class="card-img-top img-fluid" alt="Product Image">
                         <div class="card-body">
@@ -211,16 +214,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer mx-auto">
-                    <h5 class="text-center">Total: $<span id="total">{{basket.reduce(add, 0) || 0}}</span></h5>
+                    <h5 class="text-center mt-3">Total: $<span id="total">{{basket.reduce(add, 0) || 0}}</span></h5>
                     <h5 class="text-center">Credit: $<span id="total">{{user.current_credit}}</span></h5>
                     <button class="btn btn-danger btn-block" id="checkout-btn" disabled>Checkout</button>
                 </div>
-            </div>
         </div>
     </div>
-    <footer class="bg-dark">
-        <div class="container mt-5">
+    <footer class="bg-dark mt-5">
+        <div class="container">
             <p style="color: lightgrey;">Copyright - My Band 2022</p>
         </div>
     </footer>

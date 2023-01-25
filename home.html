@@ -2,38 +2,60 @@
 <html>
 
 <head>
-    <title>My Band</title>
+    <title>Homepage</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-        </script>
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
-        </script>
+    </script>
 </head>
+<script>
+    import axios from 'axios'
+    export default {
+        data() {
+            return {
+                otherFileProperties: [],
+                filterValue: this.user.emotional_value
+            };
+        },
+        created() {
+            axios.get('/shop.html')
+                .then(response => {
+                    this.otherFileProperties = response.data
+                })
+        },
+        computed: {
+            filteredProducts() {
+                return this.otherFileProperties.products.filter(prop => prop.emotional_value === this.filterValue);
+            }
+        }
+    };
+</script>
 <script type="module">
     import { createApp } from 'https://unpkg.com/petite-vue?module'
 
@@ -100,53 +122,68 @@
                 </li>
             </ul>
         </div>
-        <div><h5 v-if="user">Logged in as: {{user.name}} | <span style="cursor: pointer;" @click="logout">Logout</span></h5> </div>
+        <div>
+            <h5 v-if="user">Logged in as: {{user.name}} | <span style="cursor: pointer;" @click="logout">Logout</span>
+            </h5>
+        </div>
+        <div>
+            <h5 v-if="!user"><span style="cursor: pointer;" @click="document.location.href='login.html';">Log In or Sign
+                    Up</span></h5>
+        </div>
     </nav>
-    <div class="container">
-        <div class="row">
-            <div v-if="user" class="col-md-6 offset-md-3">
-                <h1 class="text-center my-4">Rate Your Emotions</h1>
-                <form>
-                    <div class="form-group">
-                        <label for="emotions">How do you feel today?</label>
-                        <select class="form-control" id="emotions" @change="onchange($event)">
-                            <option value="1">Melancholic</option>
-                            <option value="2">Sad</option>
-                            <option value="3">Neutral</option>
-                            <option value="4">Happy</option>
-                            <option value="5">Hyped</option>
-                        </select>
-                    </div>
-                    <div class="form-group text-center">
-                        <button type="button" class="btn btn-primary"
-                            @click="updateEmotionalValue(); return false">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-    </div>
-    <section id="myprofile">
-        <div class="container mt-5">
-            <h1>My Profile</h1>
+    <div class="background row">
+        <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <img src="https://i.ibb.co/6DM1tr7/DALL-E-2023-01-23-20-24-19-a-jazz-group-named-lima-blues.png"
-                        class="img-thumbnail">
-                </div>
-                <div class="col-md-8">
-                    <h2> Lima Blues</h2>
-                    <p>We are a Jazz band who aim to sing and play for the most emotional hearts and most beautiful
-                        ears.</p>
-                    <p>Lets wander around the website, buy tickets and albums, and play some of our songs.
-                    </p>
+                <div v-if="user" class="col-md-6 offset-md-3">
+                    <h1 class="text-center my-4">Rate Your Emotions</h1>
+                    <form>
+                        <div class="form-group">
+                            <label style="color: white;" for="emotions">How do you feel today?</label>
+                            <select class="form-control" id="emotions" @change="onchange($event)">
+                                <option value="1">Melancholic</option>
+                                <option value="2">Sad</option>
+                                <option value="3">Neutral</option>
+                                <option value="4">Happy</option>
+                                <option value="5">Hyped</option>
+                            </select>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="button" class="btn btn-primary"
+                                onclick="alert('Thanks for submitting. Wait for any surprise from us :)')"
+                                @click="updateEmotionalValue(); return false">Submit</button>
+                        </div>
+                    </form>
+                    <div style="width:200px" v-for="item of filteredProducts" :key="item.emotional_value"
+                        class="card mr-2 mt-4 mx-auto">
+                        <img style="object-fit: cover; height: 200px; width:200px" :src="item.icon_url"
+                            class="card-img-top img-fluid" alt="Product Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.name}}</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-
+        <section class="mx-auto" id="myprofile">
+            <div class="container mt-5">
+                <h1>Lima Blues</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="https://i.ibb.co/6DM1tr7/DALL-E-2023-01-23-20-24-19-a-jazz-group-named-lima-blues.png"
+                            class="img-thumbnail">
+                    </div>
+                    <div class="col-md-8">
+                        <p style="color: white;" >We are a Jazz band who aim to sing and play for the most emotional hearts and most beautiful
+                            ears.</p>
+                        <p style="color: white;" >Lets wander around the website, buy tickets and albums, and play some of our songs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
     <footer class="bg-dark">
-        <div class="container mt-5">
+        <div class="container">
             <p style="color: lightgrey;">Copyright - My Band 2022</p>
         </div>
     </footer>

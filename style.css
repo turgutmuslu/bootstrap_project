@@ -1,0 +1,111 @@
+/* Add a custom font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* Set the font for the entire page */
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Style the navigation bar */
+.navbar {
+    background-color: #3498db; /* Change the background color */
+    box-shadow: 2px 2px 10px #333; /* Add a subtle shadow */
+}
+
+.navbar a {
+    color: #fff; /* Change the text color */
+}
+
+  .background {
+    color: hsl(324, 70%, 45%);
+    animation: wheelHueColor 10s infinite;
+    background-color: currentColor;
+  }
+  @supports (background-blend-mode: overlay) {
+    .background {
+      background-image: linear-gradient(45deg, white 10%, black 90%);
+      background-blend-mode: overlay;
+    }
+  }
+  @keyframes wheelHueColor {
+    from, to { color: hsl(324, 70%, 45%); }
+    10%      { color: hsl(360, 65%, 45%); }
+    20%      { color: hsl( 36, 80%, 45%); }
+    30%      { color: hsl( 72, 75%, 35%); }
+    40%      { color: hsl(108, 65%, 35%); }
+    50%      { color: hsl(144, 75%, 35%); }
+    60%      { color: hsl(180, 75%, 35%); }
+    70%      { color: hsl(216, 60%, 45%); }
+    80%      { color: hsl(252, 65%, 50%); }
+    90%      { color: hsl(288, 60%, 40%); }
+  }
+  
+  /* misc */
+  * { margin: 0; padding: 0; }
+  .background {
+    min-height: 100vh;
+    display: flex;
+  }
+
+/* Style the header */
+header {
+    background-image: url(header-bg.jpg); /* Add a background image */
+    background-size: cover; /* Make the image cover the entire header */
+    background-position: center; /* Center the image */
+    min-height: 350px; /* Increase the height of the header */
+    display: flex; /* Center the content
+/* Add a custom font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* Set the font for the entire page */
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Style the navigation bar */
+.navbar {
+    background-color: #3498db; /* Change the background color */
+    box-shadow: 2px 2px 10px #333; /* Add a subtle shadow */
+}
+
+.navbar a {
+    color: #fff; /* Change the text color */
+}
+
+/* Style the header */
+header {
+    background-image: url(header-bg.jpg); /* Add a background image */
+    background-size: cover; /* Make the image cover the entire header */
+    background-position: center; /* Center the image */
+    min-height: 350px; /* Increase the height of the header */
+    display: flex; /* Center the content
+    background-color: #3498db; /* Change the background color */
+    color: #fff; /* Change the text color */
+    padding: 25px 0; /* Add some padding to the top and bottom */
+}
+
+/* Style the copyright text */
+footer p {
+    margin-bottom: 0; /* Remove the bottom margin */
+}
+
+/* Style the social links */
+footer .social-links {
+    display: flex; /* Display the links in a row */
+    justify-content: flex-end; /* Align the links to the right */
+}
+
+footer .social-links li {
+    list-style: none; /* Remove the bullet points */
+    margin-left: 10px; /* Add some space between the links */
+}
+
+footer .social-links a {
+    color: #fff; /* Change the link color */
+    text-decoration: none; /* Remove the underline */
+    transition: color 0.2s; /* Add a transition to the color change on hover */
+}
+
+footer .social-links a:hover {
+    color: #3498db; /* Change the link color on hover */
+}
