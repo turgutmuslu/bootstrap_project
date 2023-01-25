@@ -34,28 +34,6 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
 </head>
-<script>
-    import axios from 'axios'
-    export default {
-        data() {
-            return {
-                otherFileProperties: [],
-                filterValue: this.user.emotional_value
-            };
-        },
-        created() {
-            axios.get('/shop.html')
-                .then(response => {
-                    this.otherFileProperties = response.data
-                })
-        },
-        computed: {
-            filteredProducts() {
-                return this.otherFileProperties.products.filter(prop => prop.emotional_value === this.filterValue);
-            }
-        }
-    };
-</script>
 <script type="module">
     import { createApp } from 'https://unpkg.com/petite-vue?module'
 
@@ -89,7 +67,43 @@
             console.log(data)
             localStorage.setItem('user', JSON.stringify(data.data))
             this.user = data.data
-        }
+        },
+        products: [
+            {
+                name: "Happy Human Wallpaper",
+                price: "26",
+                icon_url: "https://i.scdn.co/image/ab67616d0000b273249eb295d33fc4c079081ca1",
+                emotional_value: 4
+            },
+            {
+                name: "Winter Blues Deluxe Album",
+                price: "50",
+                icon_url: "https://is2-ssl.mzstatic.com/image/thumb/Music123/v4/e8/76/e0/e876e0b0-e820-5bfb-5e40-f9dfa54676e1/20UMGIM05264.rgb.jpg/1200x1200bf-60.jpg",
+                emotional_value: 1
+            },
+            {
+                name: "Blue Blood (New)",
+                price: "90",
+                icon_url: "https://c.saavncdn.com/520/Anonymous-Blues-English-2017-500x500.jpg",
+                emotional_value: 3
+            },
+            {
+                name: "Awaken",
+                price: "15",
+                icon_url: "https://cdns-images.dzcdn.net/images/cover/f46b4d9baa2d63488ccaeee2519e7550/264x264.jpg",
+                emotional_value: 5
+            },
+            {
+                name: "Blues Delight Nostalgic Edition",
+                price: "57",
+                icon_url: "https://i.scdn.co/image/ab67616d0000b273958099acbe1ccc0b2c46818d",
+                emotional_value: 2
+            },
+        ],
+        async filteredProducts() {
+            console.log("yazdi");
+                return products.filter(prop => prop.emotional_value === this.user.emotional_value);
+            }
     }).mount("body")
 </script>
 
@@ -153,6 +167,7 @@
                                 @click="updateEmotionalValue(); return false">Submit</button>
                         </div>
                     </form>
+                    <div v-for="item of filteredProducts">{{item.name}}</div>
                     <div style="width:200px" v-for="item of filteredProducts" :key="item.emotional_value"
                         class="card mr-2 mt-4 mx-auto">
                         <img style="object-fit: cover; height: 200px; width:200px" :src="item.icon_url"
